@@ -98,12 +98,13 @@ public class SmsGpsService extends Service {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				if (null != SmsGpsService.this.location) {
-					String loc = DF4.format(SmsGpsService.this.location.getLatitude())//8
+					String loc = "" + DF4.format(SmsGpsService.this.location.getLatitude())//8
 							+ "," + DF4.format(SmsGpsService.this.location.getLongitude())//8
-							+ "," + ((int)SmsGpsService.this.location.getAltitude())//6
+							+ "," + DF4.format(SmsGpsService.this.location.getAltitude())//6
 							+ "," + DF4.format(SmsGpsService.this.location.getSpeed())//6
-							+ "," + System.currentTimeMillis()/1000;//10
-					Log.i(TAG, loc);
+							+ "," + DF4.format(SmsGpsService.this.location.getAccuracy())//6
+							+ "," + DF4.format(SmsGpsService.this.location.getBearing())//6
+							+ "," + System.currentTimeMillis()/1000;//10					Log.i(TAG, loc);
 					//write to file
 					writeSD(loc);
 					sendSMS(loc);
