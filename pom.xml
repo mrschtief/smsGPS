@@ -15,60 +15,6 @@
             <version>2.3.3</version>
             <scope>provided</scope>
         </dependency>
-        <!--
-                <dependency>
-                    <groupId>com.google.android</groupId>
-                    <artifactId>android</artifactId>
-                    <version>2.2.1</version>
-                    <scope>provided</scope>
-                </dependency>
-        <dependency>
-            <groupId>com.google.android.maps</groupId>
-            <artifactId>maps</artifactId>
-            <version>3_r3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.future.usb</groupId>
-            <artifactId>usb</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        -->
-        <!--
--->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.2</version>
-        </dependency>
-        <!-- for logging in LocatorLib -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-android</artifactId>
-            <version>1.6.1-RC1</version>
-        </dependency>
-        
-<!--
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>3.0</version>
-            <classifier>no_aop</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>org.roboguice</groupId>
-            <artifactId>roboguice</artifactId>
-            <version>1.1.1</version>
-        </dependency>
--->
-
-        <!--<dependency>-->
-        <!--<groupId>roboguice</groupId>-->
-        <!--<artifactId>roboguice</artifactId>-->
-        <!--<version>1.1-SNAPSHOT</version>-->
-        <!--</dependency>-->
     </dependencies>
     <build>
         <!--
@@ -96,7 +42,7 @@
                     <sdk>
                         <path>${env.ANDROID_HOME}</path>
                         <!--<path>/Users/biafra/android/sdk</path>-->
-                        <platform>10</platform>
+                        <platform>8</platform>
                     </sdk>
                     <deleteConflictingFiles>true</deleteConflictingFiles>
                     <androidManifestFile>${project.build.directory}/filtered-manifest/AndroidManifest.xml
@@ -135,62 +81,6 @@
                                     <target>1.6</target>
                                 </configuration>
             </plugin>
-            <!-- copy the artifact to where the Intellij Android plugin expects it -->
-            <!--
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-dependency-plugin</artifactId>
-                            <executions>
-                                <execution>
-                                    <id>copy-installed</id>
-                                    <phase>package</phase>
-                                    <goals>
-                                        <goal>copy</goal>
-                                    </goals>
-                                    <configuration>
-                                        <artifactItems>
-                                            <artifactItem>
-                                                <groupId>${project.groupId}</groupId>
-                                                <artifactId>${project.artifactId}</artifactId>
-                                                <version>${project.version}</version>
-                                                <type>${project.packaging}</type>
-                                            </artifactItem>
-                                        </artifactItems>
-                                        <outputDirectory>target/classes</outputDirectory>
-                                        <stripVersion>true</stripVersion>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                        </plugin>
-            -->
-            <!--<plugin>-->
-            <!--<groupId>com.pyx4me</groupId>-->
-            <!--<artifactId>proguard-maven-plugin</artifactId>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<phase>process-classes</phase>-->
-            <!--<goals>-->
-            <!--<goal>proguard</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--<configuration>-->
-            <!--<injar>android-classes</injar>-->
-            <!--<libs>-->
-            <!--<lib>/System/Library/Java/JavaVirtualMachines//1.6.0.jdk/Contents/Classes/classes.jar</lib>-->
-            <!--&lt;!&ndash;<lib>${java.home}/lib/rt.jar</lib>&ndash;&gt;-->
-            <!--</libs>-->
-            <!--<obfuscate>false</obfuscate>-->
-            <!--<options>-->
-            <!--<option>-keep public class * extends android.app.Activity</option>-->
-            <!--<option>-dontskipnonpubliclibraryclasses</option>-->
-            <!--<option>-dontoptimize</option>-->
-            <!--<option>-printmapping map.txt</option>-->
-            <!--<option>-printseeds seed.txt</option>-->
-            <!--<option>-ignorewarnings</option>-->
-            <!--</options>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
         </plugins>
     </build>
     <repositories>
@@ -204,23 +94,6 @@
             <name>Sonatype Guice SNAPSHOT repository</name>
             <url>https://repository.sonatype.org/content/groups/forge</url>
         </repository>
-
-        <!--<repository>-->
-        <!--<releases>-->
-        <!--<enabled>false</enabled>-->
-        <!--<updatePolicy>always</updatePolicy>-->
-        <!--<checksumPolicy>warn</checksumPolicy>-->
-        <!--</releases>-->
-        <!--<snapshots>-->
-        <!--<enabled>true</enabled>-->
-        <!--<updatePolicy>never</updatePolicy>-->
-        <!--<checksumPolicy>fail</checksumPolicy>-->
-        <!--</snapshots>-->
-        <!--<id>codehausSnapshots</id>-->
-        <!--<name>Codehaus Snapshots</name>-->
-        <!--<url>http://snapshots.maven.codehaus.org/maven2</url>-->
-        <!--<layout>default</layout>-->
-        <!--</repository>-->
     </repositories>
     <profiles>
         <profile>
