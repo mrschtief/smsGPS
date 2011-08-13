@@ -22,7 +22,7 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
-public class SmsGPSService extends Service {
+public class SmsGpsService extends Service {
 
 	private static final long INTERVAL = 60000;
 	private static final String TAG = "SMSGPS";
@@ -72,7 +72,7 @@ public class SmsGPSService extends Service {
 			public void onLocationChanged(Location location) {
 				// Called when a new location is found by the network location
 				// provider.
-				SmsGPSService.this.location = location;
+				SmsGpsService.this.location = location;
 				Log.d(TAG, "onLocationChanged " + System.currentTimeMillis());
 			}
 
@@ -97,11 +97,11 @@ public class SmsGPSService extends Service {
 		
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
-				if (null != SmsGPSService.this.location) {
-					String loc = DF4.format(SmsGPSService.this.location.getLatitude())//8
-							+ "," + DF4.format(SmsGPSService.this.location.getLongitude())//8
-							+ "," + ((int)SmsGPSService.this.location.getAltitude())//6
-							+ "," + DF4.format(SmsGPSService.this.location.getSpeed())//6
+				if (null != SmsGpsService.this.location) {
+					String loc = DF4.format(SmsGpsService.this.location.getLatitude())//8
+							+ "," + DF4.format(SmsGpsService.this.location.getLongitude())//8
+							+ "," + ((int)SmsGpsService.this.location.getAltitude())//6
+							+ "," + DF4.format(SmsGpsService.this.location.getSpeed())//6
 							+ "," + System.currentTimeMillis()/1000;//10
 					Log.i(TAG, loc);
 					//write to file

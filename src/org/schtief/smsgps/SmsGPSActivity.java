@@ -28,11 +28,11 @@ public class SmsGPSActivity extends Activity implements OnClickListener {
 	    switch (src.getId()) {
 	    case R.id.buttonStart:
 	      Log.d(TAG, "onClick: starting srvice");
-	      startService(new Intent(this, SmsGPSService.class));
+	      startService(new Intent(this, SmsGpsService.class));
 	      break;
 	    case R.id.buttonStop:
 	      Log.d(TAG, "onClick: stopping srvice");
-	      stopService(new Intent(this, SmsGPSService.class));
+	      stopService(new Intent(this, SmsGpsService.class));
 	      break;
 	    }
 	  }
