@@ -59,8 +59,7 @@ public class SmsGpsReciever extends BroadcastReceiver {
 			if (token.length < 2)
 				return;
 
-			String uri = "geo:" + token[0] + "," + token[1]
-					+ "?q=my+street+address";
+			String uri = "geo:" + token[0] + "," + token[1];
 			
 			Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
 			mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
