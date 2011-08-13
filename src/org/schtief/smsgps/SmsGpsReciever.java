@@ -22,6 +22,7 @@ public class SmsGpsReciever extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		if (intent.getAction().equals(ACTION)) {
+			Log.i(LOG_TAG, "SMS Received");
 			Toast.makeText(context, "SMS Received ", Toast.LENGTH_LONG);
 			// ---get the SMS message passed in---
 			Bundle bundle = intent.getExtras();
@@ -37,10 +38,9 @@ public class SmsGpsReciever extends BroadcastReceiver {
 					str += " :";
 					str += msgs[i].getMessageBody().toString();
 					str += "\n";
-					
 					String content	=msgs[i].getMessageBody().toString();
-					writeSD(content);
-					
+					Log.i(LOG_TAG, content);
+					writeSD(content);					
 				}
 				// ---display the new SMS message---
 				Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
@@ -59,7 +59,7 @@ public class SmsGpsReciever extends BroadcastReceiver {
 				Log.i(LOG_TAG, "wrote : "+loc);
 			}
 		} catch (Exception e) {
-			Log.e(LOG_TAG, "write location", e);
+			Log.e(LOG_TAG, "write failed", e);
 		}finally{
 			if(null!=f){
 				try {
