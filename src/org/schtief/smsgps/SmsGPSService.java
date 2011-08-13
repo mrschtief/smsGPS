@@ -18,12 +18,13 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
 public class SmsGPSService extends Service {
 
-	private static final long INTERVAL = 30000;
+	private static final long INTERVAL = 60000;
 	private static final String TAG = "SMSGPS";
 
 	Location location = null;
@@ -93,7 +94,6 @@ public class SmsGPSService extends Service {
 		// updates
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 				INTERVAL, 0, locationListener);
-
 		
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
@@ -104,27 +104,42 @@ public class SmsGPSService extends Service {
 							+ "," + DF4.format(SmsGPSService.this.location.getSpeed())//6
 							+ "," + System.currentTimeMillis()/1000;//10
 					Log.i(TAG, loc);
-					FileOutputStream f =null;
-					try {
-						// write to file
-						f =  new FileOutputStream(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "gps.csv"), true);
-						if (null != f) {
-							f.write((loc + "\n").getBytes());
-							f.flush();
-						}
-					} catch (Exception e) {
-						Log.e(TAG, "write location", e);
-					}finally{
-						if(null!=f){
-							try {
-								f.close();
-							} catch (IOException e) {
-								Log.e(TAG, "FileOutputStream close", e);
-							}
-						}
-					}
+					//write to file
+					writeSD(loc);
+					sendSMS(loc);
 				} else
 					Log.d(TAG, "hello no location"+ System.currentTimeMillis());
+			}
+
+			private void writeSD(String loc) {
+				FileOutputStream f =null;
+				try {
+					// write to file
+					f =  new FileOutputStream(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "gps.csv"), true);
+					if (null != f) {
+						f.write((loc + "\n").getBytes());
+						f.flush();
+					}
+				} catch (Exception e) {
+					Log.e(TAG, "write location", e);
+				}finally{
+					if(null!=f){
+						try {
+							f.close();
+						} catch (IOException e) {
+							Log.e(TAG, "FileOutputStream close", e);
+						}
+					}
+				}
+			}
+
+			private void sendSMS(String loc) {  
+				try{
+		            SmsManager sms = SmsManager.getDefault();
+		            sms.sendTextMessage("+491783588832", null, loc,  null, null);   
+				} catch (Exception e) {
+					Log.e(TAG, "sendSMS", e);
+				}
 			}
 		}, 0, INTERVAL);
 	}
