@@ -38,30 +38,54 @@ public class SmsGpsReciever extends BroadcastReceiver {
 					str += " :";
 					str += msgs[i].getMessageBody().toString();
 					str += "\n";
-					String content	=msgs[i].getMessageBody().toString();
+					String content = msgs[i].getMessageBody().toString();
 					Log.i(LOG_TAG, content);
-					writeSD(content);					
+					writeSD(content);
+					startMap(context, content);
 				}
 				// ---display the new SMS message---
 				Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
-	
+
+	private void startMap(Context context, String content) {
+		try {
+			if (!content.contains(","))
+				return;
+			String token[] = content.split(",");
+			if (token == null)
+				return;
+			if (token.length < 2)
+				return;
+
+			String uri = "geo:" + token[0] + "," + token[1]
+					+ "?q=my+street+address";
+			
+			Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+			mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(mapIntent);
+		} catch (Exception e) {
+			Log.e(LOG_TAG, "startMap failed", e);
+		}
+	}
+
 	private void writeSD(String loc) {
-		FileOutputStream f =null;
+		FileOutputStream f = null;
 		try {
 			// write to file
-			f =  new FileOutputStream(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "gpsRecieve.csv"), true);
+			f = new FileOutputStream(new File(Environment
+					.getExternalStorageDirectory().getAbsolutePath(),
+					"gpsRecieve.csv"), true);
 			if (null != f) {
 				f.write((loc + "\n").getBytes());
 				f.flush();
-				Log.i(LOG_TAG, "wrote : "+loc);
+				Log.i(LOG_TAG, "wrote : " + loc);
 			}
 		} catch (Exception e) {
 			Log.e(LOG_TAG, "write failed", e);
-		}finally{
-			if(null!=f){
+		} finally {
+			if (null != f) {
 				try {
 					f.close();
 				} catch (IOException e) {
