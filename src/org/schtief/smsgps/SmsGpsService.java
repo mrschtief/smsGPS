@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 public class SmsGpsService extends Service {
 
-    private static final long INTERVAL = 60000;
+    private static final long INTERVAL = 120000;
     private static final String TAG = "SMSGPS";
     private static Integer level = -1;
     private static Integer temperature = -1;
@@ -153,7 +153,7 @@ public class SmsGpsService extends Service {
                 try {
                     SmsManager sms = SmsManager.getDefault();
 		            sms.sendTextMessage("+491783588832", null, loc,  null, null);
-//                    sms.sendTextMessage("+491792900944", null, loc, null, null);
+                    sms.sendTextMessage("+491792900944", null, loc, null, null);
                 } catch (Exception e) {
                     Log.e(TAG, "sendSMS", e);
                 }
