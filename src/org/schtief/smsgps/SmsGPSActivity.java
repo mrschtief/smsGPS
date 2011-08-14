@@ -43,7 +43,7 @@ public class SmsGPSActivity extends Activity implements OnClickListener {
                 Log.d(TAG, "onClick: Video Recording");
                 Intent i = new Intent("android.media.action.VIDEO_CAPTURE");
                 i.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File("/sdcard/recording" + System.currentTimeMillis() + ".mp4")));
-                i.putExtra(android.provider.MediaStore.EXTRA_VIDEO_QUALITY, 0);
+                i.putExtra(android.provider.MediaStore.EXTRA_VIDEO_QUALITY, 1);
                 i.putExtra("android.intent.extra.durationLimit", 10 * 60 * 60);
                 startActivityForResult(i, 2);
 
