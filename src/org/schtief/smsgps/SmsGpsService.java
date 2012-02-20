@@ -152,8 +152,8 @@ public class SmsGpsService extends Service {
             private void sendSMS(String loc) {
                 try {
                     SmsManager sms = SmsManager.getDefault();
-		            sms.sendTextMessage("+491783588832", null, loc,  null, null);
-                    sms.sendTextMessage("+491792900944", null, loc, null, null);
+		            sms.sendTextMessage("" /*insert phone number here/*, null, loc,  null, null);
+                    sms.sendTextMessage(""/*insert phone number here/*, null, loc, null, null);
                 } catch (Exception e) {
                     Log.e(TAG, "sendSMS", e);
                 }
